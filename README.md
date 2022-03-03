@@ -1,6 +1,6 @@
 
 
-## About Laravel
+## About Realtime Messaging:
 Realtime Message Sending by Laravel Pusher
 
 ## Install a freash Laravel project.
