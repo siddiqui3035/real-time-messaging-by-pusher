@@ -38,6 +38,6 @@ class MessageRealTime implements ShouldBroadcast
     }
 
     public function broadcastAs(){
-        return 'messageRealTime';
+        return 'message';
     }
 }

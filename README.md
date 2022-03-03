@@ -62,7 +62,7 @@ public function __construct($username, $message)
 &
 
 public function broadcastAs(){
-    return 'messageRealTime';
+    return 'message';
 }
 
 ```
@@ -227,6 +227,96 @@ Route::post('/send-message', function(Request $request){
 });
 
 ```
+
+## Now go to js folder;
+ open bootstrup.js file and uncommend below part;
+ ```php
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    forceTLS: true
+});
+
+ ```
+## Now install Laravel-echo and pusher.js
+```php
+npm install --save laravel-echo pusher-js
+```
+
+## Now Install pusher:
+```php
+composer require pusher/pusher-php-server
+
+```
+## Now run below command:
+```php
+npm run watch
+```
+
+## Go to app.js file:
+```php
+const messages_el = document.getElementById("messages");
+const username_input = document.getElementById("username");
+const message_input = document.getElementById("message_input");
+const message_form = document.getElementById("message_form");
+
+message_form.addEventListener('submit', function(e){
+    e.preventDefault();
+    let has_errors = false;
+
+    if(username_input.value == ""){
+        alert("Please enter your Username");
+        has_errors = true;
+    }
+
+    if(message_input.value == ""){
+        alert("Please enter your message");
+        has_errors = true;
+    }
+
+    if(has_errors){
+        return;
+    }
+
+    const options = {
+        method: 'post', 
+        url: '/send-message',
+        data: {
+            username: username_input.value,
+            message: message_input.value,
+        }
+
+    }
+
+    axios(options);
+});
+
+window.Echo.channel('chat')
+ .listen('.message', (e) => {
+    // console.log();
+    messages_el.innerHTML += '<div class="message"><strong>' + e.username + ':</strong> ' + e.message + '</div>';  
+ }) 
+
+```
+
+## Now go to config/app.php:
+**uncommand 
+```php
+App\Providers\BroadcastServiceProvider::class,
+```
+
+## Now run below command;
+
+```php 
+php artisan serve
+```
+and test you project.
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
