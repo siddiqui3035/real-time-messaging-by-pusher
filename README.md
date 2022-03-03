@@ -4,6 +4,17 @@
 Realtime Message Sending by Laravel Pusher
 
 ## Install a freash Laravel project.
+```php
+composer create-project laravel/laravel:^8.0 realtime-messageing-by-pusher
+
+```
+
+## Now enter into project folder:
+```php 
+npm install
+
+npm run dev
+```
 
 ## Register at pusher website for create pusher app;
 
