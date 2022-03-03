@@ -20,3 +20,8 @@ use Illuminate\Http\Response;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::post('/send-message', function(Request $request){
+    event(new MessageRealTime($request->input('username'), $request->input('message')));
+    return ["success" => true];
+});

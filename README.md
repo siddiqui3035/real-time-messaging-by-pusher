@@ -116,6 +116,118 @@ npm run dev
 
 ```
 
+## Add some style on app.css file:
+```css
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #eee;
+}
+
+input, button{
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+input{
+    display: block;
+    width: 100%;
+    background-color: #eee;
+    padding: 12px 16px;
+    font-size: 18px;
+    color: #888;
+}
+ 
+.app{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header{
+    display: flex;
+    padding-top: 128px;
+    padding-bottom: 32px;
+    background-color: rgb(23, 150, 182);
+    background-image: linear-gradient(to bottom, #8C38FF );
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+h1{
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+#username{
+    border-radius: 8px;
+    transition: 0.4s;
+    text-align: center;
+}
+
+#username:focus{
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+#messages{
+    flex: 1 1 0%;
+    overflow: scroll;
+    padding: 16px;
+}
+
+.message{
+    display: block;
+    width: 100%;
+    border-radius: 99px;
+    background-color: #fff;
+    padding: 8px 16px;
+    box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.message strong{
+    color: #8C38FF;
+    font-weight: 600;
+}
+
+#message_form{
+    display: flex;
+}
+
+#message_send{
+    appearance: none;
+    background-color: rgb(23, 150, 182);
+    padding: 4px 8px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+```
+
+## Go to web.php
+
+```php
+Route::post('/send-message', function(Request $request){
+    event(new MessageRealTime($request->input('username'), $request->input('message')));
+    return ["success" => true];
+});
+
+```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
