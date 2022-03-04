@@ -72,6 +72,13 @@ public function __construct($username, $message)
 
 &
 
+public function broadcastOn()
+{
+    return new Channel('chat');
+}
+
+&
+
 public function broadcastAs(){
     return 'message';
 }

@@ -1,6 +1,13 @@
+require('./bootstrap');
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
+
 const { default: axios } = require('axios');
 
-require('./bootstrap');
 // alert('Hello wrold');
 const messages_el = document.getElementById("messages");
 const username_input = document.getElementById("username");

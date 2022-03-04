@@ -5,7 +5,6 @@ use App\Events\MessageRealTime;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +17,10 @@ use Illuminate\Http\Response;
 */
 
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/chat-live', function () {
     return view('index');
 });
 
@@ -25,3 +28,9 @@ Route::post('/send-message', function(Request $request){
     event(new MessageRealTime($request->input('username'), $request->input('message')));
     return ["success" => true];
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
